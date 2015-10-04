@@ -1,6 +1,6 @@
 {
   "name": "gengojs-notation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The official notation used in gengo.js",
   "main": "src/index.js",
   "scripts": {
