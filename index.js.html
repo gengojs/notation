@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>gengo.js/notation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/cayman.css">
+    <link rel="stylesheet" href="css/prism.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">gengo.js/notation</h1>
+      <h2 class="project-tagline">The official notation used in gengo.js</h2><a href="https://github.com/gengojs/notation#readme" target="_blank" class="btn">View on GitHub</a><a href="https://npmjs.com/package/gengojs-notation" target="_blank" class="btn">View on npm</a>
+    </section>
+    <section data-spy="scroll" data-target=".scrollspy" class="main-content">
+      <div class="row">
+        <div class="col-md-3 col-xs-3 bs-docs-sidebar">
+          <ul id="sidebar" class="nav nav-stacked fixed">
+            <li><a href="index.html">Main</a></li>
+            <li class="active"><a href="index.js.html">index.js
+                <ul class="nav nav-stacked">
+                  <li><a href="#notations"><i class="alert alert-success"></i><span>notations</span></a>
+                  </li>
+                  <li><a href="#Notation"><i class="alert alert-success"></i><span>Notation</span></a>
+                  </li>
+                  <li><a href="#isBracket"><i class="alert alert-info"></i><span>isBracket</span></a>
+                  </li>
+                  <li><a href="#isDot"><i class="alert alert-info"></i><span>isDot</span></a>
+                  </li>
+                  <li><a href="#isPhrase"><i class="alert alert-info"></i><span>isPhrase</span></a>
+                  </li>
+                  <li><a href="#parse"><i class="alert alert-info"></i><span>parse</span></a>
+                  </li>
+                </ul></a></li>
+          </ul>
+        </div>
+        <div class="col-md-9">
+          <section id="notations">
+            <h1>notations</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">declaration</div><span>&nbsp;</span><span>notations</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"></div>
+          <pre><code class="language-javascript">var notations = {
+  bracket: /^\[([\s\S]+)\][\.]?([\w\S]+)*/,
+  dot: /\.[^.]/,
+  spaces: /\s/
+};</code></pre>
+          <section id="Notation">
+            <h1>Notation</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">class</div><span>&nbsp;</span><span>new Notation()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>This class determines whether a<br />string is in phrase, bracket, or dot notation.</p></div>
+          <pre><code class="language-javascript">class Notation {
+  constructor(str) {
+      this._key = str;
+    }</code></pre>
+          <section id="isBracket">
+            <h1>isBracket</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>Notation.isBracket()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>str</td>
+                <td>String</td>
+                <td><p>The string to determine.</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>Boolean</td>
+                <td><p>Returns true if the string is in bracket notation.</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Determines whether a string is in bracket notation</p></div>
+          <pre><code class="language-javascript">static isBracket(str) {
+    let hasBracket = Notation.hasPattern(str, notations.bracket);
+    let hasEscaped = str.indexOf('[\\') &gt; -1;
+    return hasBracket &amp;&amp; !hasEscaped;
+  }</code></pre>
+          <section id="isDot">
+            <h1>isDot</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>Notation.isDot()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>str</td>
+                <td>String</td>
+                <td><p>The string to determine.</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>Boolean</td>
+                <td><p>Returns true if the string is in dot notation.</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Determines whether a string is in dot notation</p></div>
+          <pre><code class="language-javascript">static isDot(str) {
+    let hasDot = Notation.hasPattern(str, notations.dot);
+    let hasSpaces = Notation.hasPattern(str, notations.spaces);
+    return hasDot &amp;&amp; !hasSpaces;
+  }</code></pre>
+          <section id="isPhrase">
+            <h1>isPhrase</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>Notation.isPhrase()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>str</td>
+                <td>String</td>
+                <td><p>The string to determine.</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>Boolean</td>
+                <td><p>Returns true if the string is in dot notation.</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Determines whether a string is in dot notation</p></div>
+          <pre><code class="language-javascript">static isPhrase(str) {
+    return !Notation.isBracket(str) &amp;&amp; !Notation.isDot(str);
+  }</code></pre>
+          <section id="parse">
+            <h1>parse</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>Notation.prototype.parse()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns the notation type based on the string.</p></div>
+          <pre><code class="language-javascript">parse() {
+  if (Notation.isPhrase(this._key)) {
+    return {
+      type: 'phrase',
+      key: this._key.indexOf('[\\') &gt; -1 ?
+        this._key.replace('\\', '') : this._key,
+      seek: undefined
+    };
+  }
+  if (Notation.isBracket(this._key)) {
+    var result = notations.bracket.exec(this._key);
+    return {
+      type: 'bracket',
+      key: result[1],
+      seek: result[2]
+    };
+  }
+  if (Notation.isDot(this._key)) {
+    return {
+      type: 'dot',
+      key: this._key,
+      seek: undefined
+    };
+  }
+}
+}
+
+export default Notation;</code></pre>
+          <div class="footer site-footer">
+            <div class="span site-footer-owner"><a href="https://github.com/mr-doc/mr-doc-theme-cayman">Cayman</a> is maintained by <a href="https://github.com/iwatakeshi">iwatakeshi</a>.</div>
+            <div class="span site-footer-credits">This page was generated by <a href="https://github.com/mr-doc/mr-doc">Mr. Doc</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/affix.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/scrollspy.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/prism-bash.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('body').scrollspy({
+          target: ".bs-docs-sidebar",
+          offset: 40
+        });
+        $('#sidebar').affix({
+          offset:{
+            bottom:60,
+            top: 60
+          }
+        }) 
+      });
+    </script>
+  </body>
+</html>
