@@ -21,7 +21,7 @@ text = '[Hello world!]';
 var bracket = new Notation(text).parse();
 // -> { type: 'bracket', key: 'Hello world!, seek: undefined }
 
-text = '[hello world!].informal';
+text = '[Hello world!].informal';
 
 bracket = new Notation(text).parse();
 // -> { type: 'bracket', key: 'Hello world!, seek: 'informal' }
