@@ -11,12 +11,12 @@ See [documentation](https://gengojs.github.io/notation)
 
 ```javascript
 import Notation from 'gengojs-notation';
-var text = 'Hello world!;
+var text = 'Hello world!';
 
 var phrase = new Notation(text).parse();
 // -> { type: 'phrase', key: 'Hello world!, seek: undefined }
 
-text = '[Hello world!];
+text = '[Hello world!]';
 
 var bracket = new Notation(text).parse();
 // -> { type: 'bracket', key: 'Hello world!, seek: undefined }
