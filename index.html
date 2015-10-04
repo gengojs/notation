@@ -33,12 +33,12 @@
 <p>See <a href="https://gengojs.github.io/notation">documentation</a></p>
 <h2>Usage</h2>
 <pre><code class="language-javascript">import Notation from 'gengojs-notation';
-var text = 'Hello world!;
+var text = 'Hello world!';
 
 var phrase = new Notation(text).parse();
 // -&gt; { type: 'phrase', key: 'Hello world!, seek: undefined }
 
-text = '[Hello world!];
+text = '[Hello world!]';
 
 var bracket = new Notation(text).parse();
 // -&gt; { type: 'bracket', key: 'Hello world!, seek: undefined }
